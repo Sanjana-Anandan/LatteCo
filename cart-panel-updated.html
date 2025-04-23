@@ -1,0 +1,23 @@
+<div id="cart-panel" class="cart-panel">
+  <div class="cart-panel-header">
+    <h2>Your Cart</h2>
+    <span id="cart-close" class="cart-close">&times;</span>
+  </div>
+  <div id="cart-items-container"></div>
+  <p id="cart-total">Total: $0</p>
+  <div class="payment-options">
+    <h3>Select Payment Method:</h3>
+    <label><input type="radio" name="payment" value="Credit Card" checked> Credit Card</label>
+    <div id="credit-card-details" class="payment-details">
+      <input type="text" id="card-number" placeholder="Card Number" required />
+      <input type="text" id="card-expiry" placeholder="MM/YY" required />
+      <input type="text" id="card-cvc" placeholder="CVC" required />
+    </div>
+    <label><input type="radio" name="payment" value="PayPal"> PayPal</label>
+    <label><input type="radio" name="payment" value="Cash on Delivery"> Cash on Delivery</label>
+  </div>
+  <div class="cart-panel-buttons">
+    <button id="clear-cart">Clear Cart</button>
+    <button id="checkout">Checkout</button>
+  </div>
+</div>

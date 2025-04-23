@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cart - Coffee.co</title>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/css/main.css" />
+  <style>
+    body {
+      font-family: 'Lato', sans-serif;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    .cart-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .cart-item {
+      border-bottom: 1px solid #ccc;
+      padding: 10px 0;
+    }
+    .cart-item input {
+      width: 60px;
+    }
+    .total, .payment-options {
+      margin-top: 20px;
+    }
+    .btn {
+      padding: 10px 20px;
+      margin: 10px 10px 0 0;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .btn-clear {
+      background-color: #e74c3c;
+      color: white;
+    }
+    .btn-checkout {
+      background-color: #2ecc71;
+      color: white;
+    }
+    .btn-clear:hover {
+      background-color: #c0392b;
+    }
+    .btn-checkout:hover {
+      background-color: #27ae60;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cart-container">
+    <h1>Your Cart</h1>
+
+    <div id="cart-items-container"></div>
+
+    <div class="total" id="cart-total">Total: $0</div>
+
+    <div class="payment-options">
+        <h3>Select Payment Method:</h3>
+        <label><input type="radio" name="payment" value="Credit Card" checked> Credit Card</label>
+        <div id="credit-card-details" class="payment-details">
+          <input type="text" id="card-number" placeholder="Card Number" required />
+          <input type="text" id="card-expiry" placeholder="MM/YY" required />
+          <input type="text" id="card-cvc" placeholder="CVC" required />
+        </div>
+      
+        <label><input type="radio" name="payment" value="PayPal"> PayPal</label>
+        <label><input type="radio" name="payment" value="Cash on Delivery"> Cash on Delivery</label>
+      </div>
+
+    <button id="clear-cart" class="btn btn-clear">Clear Cart</button>
+    <button id="checkout" class="btn btn-checkout">Checkout</button>
+
+    <p><a href="index.html" style="text-decoration: none; color: #3498db;">← Continue Shopping</a></p>
+  </div>
+
+  <script src="./assets/js/main.js"></script>
+</body>
+</html>
