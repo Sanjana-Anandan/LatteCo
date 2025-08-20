@@ -1,45 +1,42 @@
 document.addEventListener('DOMContentLoaded', () => {
-  /*=============== SHOW MENU ===============*/
+
   const navMenu = document.getElementById('nav-menu'),
     navToggle = document.getElementById('nav-toggle'),
     navClose = document.getElementById('nav-close');
 
-  /*===== MENU SHOW =====*/
-  /* Validate if constant exists */
+ 
   if (navToggle) {
     navToggle.addEventListener('click', () => {
       navMenu.classList.add('show-menu');
     });
   }
 
-  /*===== MENU HIDDEN =====*/
-  /* Validate if constant exists */
+  /* MENU HIDDEN*/
   if (navClose) {
     navClose.addEventListener('click', () => {
       navMenu.classList.remove('show-menu');
     });
   }
 
-  /*=============== REMOVE MENU MOBILE ===============*/
+ 
   const navLink = document.querySelectorAll('.nav__link');
 
   const linkAction = () => {
     const navMenu = document.getElementById('nav-menu');
-    // When we click on each nav__link, we remove the show-menu class
     navMenu.classList.remove('show-menu');
   };
   navLink.forEach((n) => n.addEventListener('click', linkAction));
 
   const scrollHeader = () => {
     const header = document.getElementById('header');
-    // When the scroll is greater than 50 viewport height, add the scroll-header class to the header tag
+   
     this.scrollY >= 50
       ? header.classList.add('scroll-header')
       : header.classList.remove('scroll-header');
   };
   window.addEventListener('scroll', scrollHeader);
 
-  /*=============== CART FUNCTIONALITY ===============*/
+  /*CART FUNCTION*/
   const cartLink = document.getElementById('cart-icon');
   const cartModal = document.getElementById('cart-panel');
   const cartModalClose = document.getElementById('cart-close');
@@ -76,6 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div>
           <strong>${item.name}</strong>
         </div>
+        <div>Customization: ${item.size ? item.size : 'None'}</div>
         <div>Price: $${item.price.toFixed(2)}</div>
         <div>
           Quantity: <input type="number" min="1" value="${item.quantity}" data-index="${index}" class="quantity-input" />
@@ -88,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     cartTotalElem.textContent = 'Total: $' + total.toFixed(2);
 
-    // Add event listeners for quantity inputs and remove buttons
+    // Add event listeners for quantity inputs 
     document.querySelectorAll('.quantity-input').forEach(input => {
       input.addEventListener('change', (e) => {
         const idx = e.target.getAttribute('data-index');
@@ -131,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderCart();
   });
 
-  // Dynamically add Pay Now button to cart panel buttons
+  //  Pay Now button to cart panel 
   const cartPanelButtons = document.querySelector('.cart-panel-buttons');
   if (cartPanelButtons) {
     const payNowBtn = document.createElement('button');
@@ -158,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       alert('Payment successful. Thank you for your purchase!');
-      // Optionally clear cart and close panel
+      // clear cart and close panel
       localStorage.removeItem('cart');
       renderCart();
       cartModal.classList.remove('open');
@@ -169,28 +167,52 @@ document.addEventListener('DOMContentLoaded', () => {
     cartModal.classList.remove('open');
   });
 
-  /*=============== ADD TO CART BUTTONS ===============*/
+  /*ADD TO CART BUTTONS*/
   const addToCartButtons = document.querySelectorAll('.products__button');
 
   addToCartButtons.forEach(button => {
     button.addEventListener('click', () => {
       const productCard = button.closest('.products__card');
       const name = productCard.querySelector('.products__name').textContent;
-      const priceText = productCard.querySelector('.products__price').textContent;
-      const price = parseFloat(priceText.replace('$', ''));
+
+      // Get updated price from custom-price element
+      const customPriceElem = productCard.querySelector('.custom-price');
+      let price = 0;
+      if (customPriceElem && customPriceElem.textContent) {
+        const priceText = customPriceElem.textContent;
+        const match = priceText.match(/\\$([0-9]+\\.?[0-9]*)/);
+        price = match ? parseFloat(match[1]) : 0;
+      }
+
+      // Fallback to base price if price is 0
+      if (!price || isNaN(price)) {
+        const basePriceElem = productCard.querySelector('.products__price');
+        if (basePriceElem) {
+          const priceText = basePriceElem.textContent;
+          price = parseFloat(priceText.replace('$', '')) || 0;
+        }
+      }
+
+      // Get customization options
+      const sizeSelect = productCard.querySelector('.custom-option.size');
+      const size = sizeSelect ? sizeSelect.value : null;
+
       const cart = getCart();
-      const existingItemIndex = cart.findIndex(item => item.name === name);
+
+      // Check if item with same name and customization exists
+      const existingItemIndex = cart.findIndex(item => item.name === name && item.size === size);
+
       if (existingItemIndex !== -1) {
         cart[existingItemIndex].quantity += 1;
       } else {
-        cart.push({ name, price, quantity: 1 });
+        cart.push({ name, price, quantity: 1, size });
       }
       saveCart(cart);
       alert(`${name} added to cart.`);
     });
   });
 
-  /*=============== FIND NEARBY CAFES BUTTON ===============*/
+  /*FIND NEARBY CAFES BUTTON*/
   const findNearbyBtn = document.getElementById('find-nearby-stores');
   if (findNearbyBtn) {
     findNearbyBtn.addEventListener('click', () => {
@@ -199,10 +221,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /*=============== DAILY SPECIALS COUNTDOWN TIMER ===============*/
+  /*DAILY SPECIALS COUNTDOWN TIMER*/
   const countdownTimerElem = document.getElementById('countdown-timer');
   if (countdownTimerElem) {
-    // Set countdown duration in seconds (e.g., 12 minutes 45 seconds = 765 seconds)
+    // Set countdown duration in seconds
     let countdownSeconds = 12 * 60 + 45;
 
     const updateCountdown = () => {
@@ -223,7 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const countdownInterval = setInterval(updateCountdown, 1000);
   }
 
-  /*=============== CUSTOMIZABLE ORDERS (DYNAMIC FORMS) ===============*/
+  /*CUSTOMIZABLE ORDERS (DYNAMIC FORMS)*/
   const productCards = document.querySelectorAll('.products__card');
 
   productCards.forEach(card => {
@@ -251,7 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updatePrice();
   });
 
-  /*=============== SPEECH-BASED SEARCH ===============*/
+  /*SPEECH-BASED SEARCH*/
   // Create and insert speech search button in products section header
   const productsSection = document.getElementById('products');
   if (productsSection) {
@@ -342,7 +364,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  /*=============== ORDER NOW BUTTON ===============*/
+  /*ORDER NOW BUTTON*/
   const orderNowBtn = document.querySelector('.hero__button');
   if (orderNowBtn) {
     orderNowBtn.addEventListener('click', () => {

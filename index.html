@@ -136,11 +136,11 @@
               data-filter=".delicacies"
             >
               <h3 class="products__title">Main Menu</h3>
-              <span class="products__stock">3 products</span>
+              <span class="products__stock">10 products</span>
             </li>
             <li class="products__item products__line" data-filter=".coffee">
               <h3 class="products__title">Coffee</h3>
-              <span class="products__stock">4 products</span>
+              <span class="products__stock">3 products</span>
             </li>
             <li class="products__item" data-filter=".cake">
               <h3 class="products__title">Desserts</h3>
@@ -153,7 +153,7 @@
             <article class="products__card main-menu">
               <div class="products__shape">
                 <img
-                  src="./assets/media/cookies.jpg"
+                  src="./assets/media/cookiesn.jpg"
                   alt=""
                   class="products__img"
                 />
@@ -190,9 +190,10 @@
             <article class="products__card main-menu">
               <div class="products__shape">
                 <img
-                  src="./assets/media/main-menu2.jpg"
+                  src="./assets/media/croissant.jpg"
                   alt=""
                   class="products__img"
+                  
                 />
               </div>
               <div class="products__data">
@@ -440,7 +441,7 @@
         </div>
       </section>
 
-      <!-- place -->
+    <!-- place -->
       <section class="place section" id="place">
         <div class="place__container container">
           <h2 class="section__title">
@@ -485,6 +486,34 @@
             </button>
           </div>
           </div>
+        </div>
+      </section>
+
+      <!-- customer reviews-->
+      <section class="reviews section container" id="reviews">
+        <h2 class="section__title">Customer Reviews</h2>
+        <div class="reviews__container">
+          <article class="review__card">
+            <h3 class="review__author">B. Smith</h3>
+            <div class="review__rating">⭐⭐⭐⭐⭐</div>
+            <p class="review__text">
+              Amazing coffee and cozy atmosphere. Highly recommend!
+            </p>
+          </article>
+          <article class="review__card">
+            <h3 class="review__author">Jane Wood</h3>
+            <div class="review__rating">⭐⭐⭐⭐</div>
+            <p class="review__text">
+              Great service and delicious pastries. Will come back again.
+            </p>
+          </article>
+          <article class="review__card">
+            <h3 class="review__author">Pat Johnson</h3>
+            <div class="review__rating">⭐⭐⭐⭐⭐</div>
+            <p class="review__text">
+              Best coffee in town! Friendly staff and relaxing place.
+            </p>
+          </article>
         </div>
       </section>
 
@@ -553,19 +582,21 @@
         </div>
       </section>
     </main>
-    <!-- Spotify Widget -->
+    <!-- Spotify -->
 <div id="spotifyWidget">
   <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/5vVSfOsF8YRueAI1dOI0Lh?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
   <button id="minimizeBtn">Hide 🎵</button>
 </div>
 
 
-    <!-- Daily Specials Floating Box -->
+    <!-- Daily Specials -->
     <div id="daily-specials" style="position: fixed; top: 100px; left: 10px; width: 250px; background: #fff8dc; border: 1px solid #ccc; padding: 15px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); z-index: 1000;">
       <h3>Happy Hour Coffee</h3>
       <p>Get 20% off on all coffee orders!</p>
       <p>Offer ends in <span id="countdown-timer">00:00:00</span></p>
     </div>
+
+    
 
     <footer class="footer">
       <div class="footer__container container">
